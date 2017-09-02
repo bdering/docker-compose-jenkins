@@ -6,6 +6,7 @@ This docker image is suitable for symfony 2.6+. It comes with...
 
   - php7.1-fpm, php7.1-xml, php7.1-dom, php7.1-curl, php7.1-mbstring
   - composer (installed globally)
+  - mysql
 
 Run jenkins with docker-compose detached
 ```sh
