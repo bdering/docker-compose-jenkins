@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+    db:
+        image: mariadb
+        # command: mysqld --user=root --verbose --skip-sync-frm --innodb_flush_log_at_trx_commit=0 --innodb-support-xa=0 --bind-address=0.0.0.0 --query-cache-type=1
+        ports:
+            - 3306:3306
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: w1060
+            MYSQL_USER: user
+            MYSQL_PASSWORD: root
+    myjenkins:
+        build: ./jenkins
+        ports:
+            - 8080:8080
+            - 50000:50000
+        links:
+            - db:mysqldb
+        environment:
+            JAVA_OPTS: "-Djava.awt.headless=true"
+        volumes:
+            - ./jenkins_home:/var/jenkins_home
